@@ -1,17 +1,17 @@
 {
-    "name": "@monstermann/NAME",
+    "name": "@monstermann/object",
     "type": "module",
     "version": "0.0.0",
-    "description": "DESC",
+    "description": "Functional utilities for objects.",
     "author": "Michael Ostermann <michaelostermann@me.com>",
     "license": "MIT",
-    "homepage": "https://MichaelOstermann.github.io/NAME",
+    "homepage": "https://MichaelOstermann.github.io/object",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/MichaelOstermann/NAME.git"
+        "url": "git+https://github.com/MichaelOstermann/object.git"
     },
     "bugs": {
-        "url": "https://github.com/MichaelOstermann/NAME/issues"
+        "url": "https://github.com/MichaelOstermann/object/issues"
     },
     "keywords": [],
     "sideEffects": false,
@@ -19,7 +19,8 @@
         ".": {
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
-        }
+        },
+        "./*": "./dist/*"
     },
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -31,5 +32,9 @@
         "bundle": "tsdown",
         "release": "bun publish --access public"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@monstermann/dfdl": "^0.1.0",
+        "@monstermann/remmi": "^0.0.0",
+        "type-fest": "^4.41.0"
+    }
 }

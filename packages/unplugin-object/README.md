@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>object</h1>
+<h1>unplugin-object</h1>
 
 **Functional utilities for objects.**
 
