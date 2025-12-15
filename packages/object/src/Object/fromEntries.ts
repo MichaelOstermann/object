@@ -25,18 +25,18 @@ type FromEntriesTuple<E, Rest> = E extends Entry
     : never
 
 type FromEntriesArray<Entries extends IterableContainer<Entry>> =
-  string extends AllKeys<Entries>
-      ? Record<string, Entries[number][1]>
-      : number extends AllKeys<Entries>
-          ? Record<number, Entries[number][1]>
-          : symbol extends AllKeys<Entries>
-              ? Record<symbol, Entries[number][1]>
-              : FromEntriesArrayWithLiteralKeys<Entries>
+    string extends AllKeys<Entries>
+        ? Record<string, Entries[number][1]>
+        : number extends AllKeys<Entries>
+            ? Record<number, Entries[number][1]>
+            : symbol extends AllKeys<Entries>
+                ? Record<symbol, Entries[number][1]>
+                : FromEntriesArrayWithLiteralKeys<Entries>
 
 type FromEntriesArrayWithLiteralKeys<Entries extends IterableContainer<Entry>> =
-  {
-      [P in AllKeys<Entries>]?: ValueForKey<Entries, P>;
-  }
+    {
+        [P in AllKeys<Entries>]?: ValueForKey<Entries, P>;
+    }
 
 type AllKeys<Entries extends IterableContainer<Entry>> = Extract<
     Entries[number],
