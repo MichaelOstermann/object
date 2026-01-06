@@ -1,6 +1,8 @@
 # isEmpty
 
-`Object.isEmpty(target)`
+```ts
+function Object.isEmpty(target: object): boolean
+```
 
 Checks if `target` object has no enumerable properties.
 

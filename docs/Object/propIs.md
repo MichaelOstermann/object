@@ -1,6 +1,8 @@
 # propIs
 
-`Object.propIs(target, key, value)`
+```ts
+function Object.propIs(target: Record<K, V>, key: K, value: V): boolean
+```
 
 Checks if the `key` property of `target` object is equal to the specified `value` using strict equality.
 

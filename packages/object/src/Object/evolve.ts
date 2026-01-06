@@ -13,13 +13,22 @@ type Evolver<T> = T extends object
     : never
 
 /**
- * `Object.evolve(target, props)`
+ * # evolve
  *
- * Creates a new object with multiple properties transformed by their corresponding functions in the `props` object.
+ * ```ts
+ * function Object.evolve(
+ *     target: Record<K, V>,
+ *     evolver: {
+ *         [K]: (value: V) => V
+ *     }
+ * ): Record<K, V>
+ * ```
+ *
+ * Creates a new object with multiple properties transformed by their corresponding functions in the `evolver` object.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.evolve(
@@ -31,7 +40,7 @@ type Evolver<T> = T extends object
  * ); // { a: 2, b: 2, c: 4 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe(
@@ -42,6 +51,7 @@ type Evolver<T> = T extends object
  *     }),
  * ); // { a: 2, b: 2, c: 4 }
  * ```
+ *
  */
 export const evolve: {
     <T extends object, U extends Evolver<T>>(evolver: U): (target: T) => T

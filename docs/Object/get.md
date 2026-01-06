@@ -1,6 +1,8 @@
 # get
 
-`Object.get(target, key)`
+```ts
+function Object.get(target: Record<K, V>, key: K): V | undefined
+```
 
 Returns the value of `key` property from `target` object, or undefined if not found.
 

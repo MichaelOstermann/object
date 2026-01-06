@@ -3,7 +3,11 @@ import { dfdlT } from "@monstermann/dfdl"
 import { merge } from "./merge"
 
 /**
- * `Object.assign(target, source)`
+ * # assign
+ *
+ * ```ts
+ * function Object.assign(target: object, source: object): object
+ * ```
  *
  * Merges properties from `source` object into `target` object, creating a new object.
  *
@@ -11,17 +15,18 @@ import { merge } from "./merge"
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.assign({ a: 1, b: 2 }, { b: 3, c: 4 }); // { a: 1, b: 3, c: 4 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: 2 }, Object.assign({ b: 3, c: 4 })); // { a: 1, b: 3, c: 4 }
  * ```
+ *
  */
 export const assign: {
     <T extends object, U extends object>(source: U): (target: T) => T extends unknown ? Merge<T, U> : never

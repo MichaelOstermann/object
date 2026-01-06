@@ -1,6 +1,8 @@
 # clone
 
-`Object.clone(target)`
+```ts
+function Object.clone(target: object): object
+```
 
 Creates a shallow copy of an object, unless marked as mutable with `markAsMutable` inside a mutation context (see [@monstermann/remmi](https://michaelostermann.github.io/remmi/#clonearray-array)).
 

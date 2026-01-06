@@ -1,6 +1,8 @@
 # matches
 
-`Object.matches(target, props)`
+```ts
+function Object.matches(target: object, props: object): boolean
+```
 
 Checks if all properties in `props` object have equal values in `target` object.
 

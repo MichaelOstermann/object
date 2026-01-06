@@ -1,6 +1,8 @@
 # pick
 
-`Object.pick(target, keys)`
+```ts
+function Object.pick(target: Record<K, V>, keys: K[]): Record<K, V>
+```
 
 Creates a new object containing only the properties specified in the `keys` iterable.
 

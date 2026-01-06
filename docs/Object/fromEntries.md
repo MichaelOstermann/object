@@ -1,6 +1,8 @@
 # fromEntries
 
-`Object.fromEntries(entries)`
+```ts
+function Object.fromEntries(entries: [K, V][]): Record<K, V>
+```
 
 Creates an object from an array of key-value pairs (entries). Each entry should be a tuple of [key, value].
 

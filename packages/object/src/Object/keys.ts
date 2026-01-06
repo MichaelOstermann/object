@@ -2,23 +2,28 @@ import type { KeysOfUnion } from "type-fest"
 import { dfdlT } from "@monstermann/dfdl"
 
 /**
- * `Object.keys(target)`
+ * # keys
+ *
+ * ```ts
+ * function Object.keys(target: Record<K, V>): K[]
+ * ```
  *
  * Returns an array of `target` object's enumerable property names.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.keys({ a: 1, b: 2, c: 3 }); // ["a", "b", "c"]
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: 2, c: 3 }, Object.keys()); // ["a", "b", "c"]
  * ```
+ *
  */
 export const keys: {
     (): <T extends object>(target: T) => KeysOfUnion<T>[]

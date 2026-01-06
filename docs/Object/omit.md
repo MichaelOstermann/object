@@ -1,6 +1,8 @@
 # omit
 
-`Object.omit(target, keys)`
+```ts
+function Object.omit(target: Record<K, V>, keys: K[]): Record<K, V>
+```
 
 Creates a new object excluding the properties specified in the `keys` iterable.
 

@@ -1,6 +1,8 @@
 # set
 
-`Object.set(target, key, value)`
+```ts
+function Object.set(target: Record<K, V>, key: K, value: V): Record<K, V>
+```
 
 Creates a new object with the `key` property set to `value`.
 

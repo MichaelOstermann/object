@@ -1,6 +1,12 @@
 # getOrElse
 
-`Object.getOrElse(target, key, orElse)`
+```ts
+function Object.getOrElse(
+    target: Record<K, V>,
+    key: K,
+    orElse: (obj: Record<K, V>) => U
+): V | U
+```
 
 Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or falsy.
 

@@ -8,25 +8,30 @@ type HasProp<T extends object, U extends KeysOfUnion<T>> = T extends unknown
     : never
 
 /**
- * `Object.hasProp(target, key)`
+ * # hasProp
+ *
+ * ```ts
+ * function Object.hasProp(target: Record<K, V>, key: K): boolean
+ * ```
  *
  * Checks if `target` object has the specified `key` property with a non-null and non-undefined value.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.hasProp({ a: 1, b: null }, "a"); // true
  * Object.hasProp({ a: 1, b: null }, "b"); // false
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: null }, Object.hasProp("a")); // true
  * pipe({ a: 1, b: null }, Object.hasProp("b")); // false
  * ```
+ *
  */
 export const hasProp: {
     <T extends object, U extends KeysOfUnion<T>>(key: U): (target: T) => target is HasProp<T, U>

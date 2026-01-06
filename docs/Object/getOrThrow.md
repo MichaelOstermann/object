@@ -1,6 +1,8 @@
 # getOrThrow
 
-`Object.getOrThrow(target, key)`
+```ts
+function Object.getOrThrow(target: Record<K, V>, key: K): V
+```
 
 Returns the value of `key` property from `target` object, or throws an error if not found or null/undefined.
 

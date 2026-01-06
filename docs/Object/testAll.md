@@ -1,6 +1,13 @@
 # testAll
 
-`Object.testAll(target, props)`
+```ts
+function Object.testAll(
+    target: Record<K, V>,
+    predicates: {
+        [K]: (value: V, key: K, obj: Record<K, V>) => boolean
+    }
+): boolean
+```
 
 Checks if all properties in `target` object pass their corresponding predicate functions in `props` object.
 

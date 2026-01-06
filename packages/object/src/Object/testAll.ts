@@ -12,25 +12,35 @@ type TestAllResult<T extends object, U> = Simplify<T & {
 }>
 
 /**
- * `Object.testAll(target, props)`
+ * # testAll
+ *
+ * ```ts
+ * function Object.testAll(
+ *     target: Record<K, V>,
+ *     predicates: {
+ *         [K]: (value: V, key: K, obj: Record<K, V>) => boolean
+ *     }
+ * ): boolean
+ * ```
  *
  * Checks if all properties in `target` object pass their corresponding predicate functions in `props` object.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.testAll({ a: 5, b: 2 }, { a: (x) => x > 3, b: (x) => x > 0 }); // true
  * Object.testAll({ a: 1, b: 2 }, { a: (x) => x > 3, b: (x) => x > 0 }); // false
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 5, b: 2 }, Object.testAll({ a: (x) => x > 3, b: (x) => x > 0 })); // true
  * pipe({ a: 1, b: 2 }, Object.testAll({ a: (x) => x > 3, b: (x) => x > 0 })); // false
  * ```
+ *
  */
 export const testAll: {
     <T extends object, U extends TestAllPredicates<T>>(props: U): (target: T) => target is TestAllResult<T, U>

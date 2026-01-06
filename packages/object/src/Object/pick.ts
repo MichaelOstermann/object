@@ -3,23 +3,28 @@ import { dfdlT } from "@monstermann/dfdl"
 import { markAsMutable } from "@monstermann/remmi"
 
 /**
- * `Object.pick(target, keys)`
+ * # pick
+ *
+ * ```ts
+ * function Object.pick(target: Record<K, V>, keys: K[]): Record<K, V>
+ * ```
  *
  * Creates a new object containing only the properties specified in the `keys` iterable.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.pick({ a: 1, b: 2, c: 3 }, ["a", "c"]); // { a: 1, c: 3 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: 2, c: 3 }, Object.pick(["a", "c"])); // { a: 1, c: 3 }
  * ```
+ *
  */
 export const pick: {
     <T extends object, K extends KeysOfUnion<T>>(keys: Iterable<K>): (target: T) => DistributedPick<T, K>

@@ -1,6 +1,8 @@
 # merge
 
-`Object.merge(target, source)`
+```ts
+function Object.merge(target: object, source: object): object
+```
 
 Merges properties from `source` object into `target` object.
 

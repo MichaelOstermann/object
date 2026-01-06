@@ -3,23 +3,28 @@ import { dfdlT } from "@monstermann/dfdl"
 import { markAsMutable } from "@monstermann/remmi"
 
 /**
- * `Object.omit(target, keys)`
+ * # omit
+ *
+ * ```ts
+ * function Object.omit(target: Record<K, V>, keys: K[]): Record<K, V>
+ * ```
  *
  * Creates a new object excluding the properties specified in the `keys` iterable.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.omit({ a: 1, b: 2, c: 3 }, ["a", "c"]); // { b: 2 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: 2, c: 3 }, Object.omit(["a", "c"])); // { b: 2 }
  * ```
+ *
  */
 export const omit: {
     <T extends object, K extends KeysOfUnion<T>>(keys: Iterable<K>): (target: T) => DistributedOmit<T, K>

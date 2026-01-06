@@ -2,23 +2,28 @@ import { dfdlT } from "@monstermann/dfdl"
 import { cloneObject } from "@monstermann/remmi"
 
 /**
- * `Object.set(target, key, value)`
+ * # set
+ *
+ * ```ts
+ * function Object.set(target: Record<K, V>, key: K, value: V): Record<K, V>
+ * ```
  *
  * Creates a new object with the `key` property set to `value`.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.set({ a: 1, b: 2 }, "a", 3); // { a: 3, b: 2 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1, b: 2 }, Object.set("a", 3)); // { a: 3, b: 2 }
  * ```
+ *
  */
 export const set: {
     <T extends object, K extends keyof T>(key: K, value: T[K]): (target: T) => T

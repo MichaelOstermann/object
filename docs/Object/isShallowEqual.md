@@ -1,6 +1,8 @@
 # isShallowEqual
 
-`Object.isShallowEqual(target, source)`
+```ts
+function Object.isShallowEqual(target: object, source: object): boolean
+```
 
 Performs a shallow equality comparison between `target` and `source` objects.
 

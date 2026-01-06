@@ -1,6 +1,8 @@
 # assign
 
-`Object.assign(target, source)`
+```ts
+function Object.assign(target: object, source: object): object
+```
 
 Merges properties from `source` object into `target` object, creating a new object.
 

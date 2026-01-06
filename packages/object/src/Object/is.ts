@@ -1,13 +1,17 @@
 import { dfdlT } from "@monstermann/dfdl"
 
 /**
- * `Object.is(target)`
+ * # is
+ *
+ * ```ts
+ * function Object.is(target: unknown): boolean
+ * ```
  *
  * Checks if `target` is a plain object.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.is({ a: 1 }); // true
@@ -16,7 +20,7 @@ import { dfdlT } from "@monstermann/dfdl"
  * Object.is("hello"); // false
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe({ a: 1 }, Object.is()); // true
@@ -24,6 +28,7 @@ import { dfdlT } from "@monstermann/dfdl"
  * pipe(null, Object.is()); // false
  * pipe("hello", Object.is()); // false
  * ```
+ *
  */
 export const is: {
     (): (target: unknown) => target is Record<PropertyKey, unknown>

@@ -8,19 +8,26 @@ type ForEachCallback<T extends object> = T extends unknown
     : never
 
 /**
- * `Object.forEach(target, fn)`
+ * # forEach
+ *
+ * ```ts
+ * function Object.forEach(
+ *     target: Record<K, V>,
+ *     fn: (entry: [K, V], target: Record<K, V>) => void
+ * ): Record<K, V>
+ * ```
  *
  * Executes `fn` function for each key-value pair in `target` object and returns the original object.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.forEach({ a: 1, b: 2 }, ([key, value]) => console.log(key, value)); // { a: 1, b: 2 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe(
@@ -28,6 +35,7 @@ type ForEachCallback<T extends object> = T extends unknown
  *     Object.forEach(([key, value]) => console.log(key, value)),
  * ); // { a: 1, b: 2 }
  * ```
+ *
  */
 export const forEach: {
     <T extends object>(fn: ForEachCallback<T>): (target: T) => T

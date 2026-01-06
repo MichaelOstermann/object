@@ -51,13 +51,17 @@ type ValueForKey<
     : Extract<Entries[number], Entry<K>>)[1]
 
 /**
- * `Object.fromEntries(entries)`
+ * # fromEntries
+ *
+ * ```ts
+ * function Object.fromEntries(entries: [K, V][]): Record<K, V>
+ * ```
  *
  * Creates an object from an array of key-value pairs (entries). Each entry should be a tuple of [key, value].
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.fromEntries([
@@ -67,7 +71,7 @@ type ValueForKey<
  * ]); // { a: 1, b: 2, c: 3 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe(
@@ -79,6 +83,7 @@ type ValueForKey<
  *     Object.fromEntries(),
  * ); // { a: 1, b: 2, c: 3 }
  * ```
+ *
  */
 export const fromEntries: {
     <const Entries extends IterableContainer<Entry>>(entries: Entries): Simplify<FromEntries<Entries>>

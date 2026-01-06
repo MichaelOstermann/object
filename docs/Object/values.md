@@ -1,6 +1,8 @@
 # values
 
-`Object.values(target)`
+```ts
+function Object.values(obj: Record<K, V>): V[]
+```
 
 Returns an array of `target` object's enumerable property values.
 

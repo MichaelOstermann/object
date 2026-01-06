@@ -1,6 +1,8 @@
 # is
 
-`Object.is(target)`
+```ts
+function Object.is(target: unknown): boolean
+```
 
 Checks if `target` is a plain object.
 

@@ -3,7 +3,14 @@ import { dfdlT } from "@monstermann/dfdl"
 import { merge } from "./merge"
 
 /**
- * `Object.mapAssign(target, map)`
+ * # mapAssign
+ *
+ * ```ts
+ * function Object.mapAssign(
+ *     target: object,
+ *     map: (obj: object) => object
+ * ): object
+ * ```
  *
  * Merges `target` object with the result of calling `map` function on `target`, creating a new object.
  *
@@ -11,13 +18,13 @@ import { merge } from "./merge"
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.mapAssign({ a: 1, b: 2 }, (obj) => ({ c: obj.a + obj.b })); // { a: 1, b: 2, c: 3 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe(
@@ -25,6 +32,7 @@ import { merge } from "./merge"
  *     Object.mapAssign((obj) => ({ c: obj.a + obj.b })),
  * ); // { a: 1, b: 2, c: 3 }
  * ```
+ *
  */
 export const mapAssign: {
     <T extends object, U extends object>(map: (target: NoInfer<T>) => U): (target: T) => T extends unknown ? Merge<T, U> : never

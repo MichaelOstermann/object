@@ -2,19 +2,27 @@ import { dfdlT } from "@monstermann/dfdl"
 import { cloneObject } from "@monstermann/remmi"
 
 /**
- * `Object.map(target, key, transform)`
+ * # map
+ *
+ * ```ts
+ * function Object.map(
+ *     target: Record<K, V>,
+ *     key: K,
+ *     transform: (value: V) => V
+ * ): Record<K, V>
+ * ```
  *
  * Creates a new object with the `key` property transformed by the `transform` function.
  *
  * ## Example
  *
- * ```ts
+ * ```ts [data-first]
  * import { Object } from "@monstermann/object";
  *
  * Object.map({ a: 1, b: 2 }, "a", (x) => x * 2); // { a: 2, b: 2 }
  * ```
  *
- * ```ts
+ * ```ts [data-last]
  * import { Object } from "@monstermann/object";
  *
  * pipe(
@@ -22,6 +30,7 @@ import { cloneObject } from "@monstermann/remmi"
  *     Object.map("a", (x) => x * 2),
  * ); // { a: 2, b: 2 }
  * ```
+ *
  */
 export const map: {
     <T extends object, U extends keyof T>(key: U, transform: (value: NoInfer<T>[U]) => T[U]): (target: T) => T

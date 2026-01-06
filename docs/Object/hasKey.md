@@ -1,6 +1,8 @@
 # hasKey
 
-`Object.hasKey(target, key)`
+```ts
+function Object.hasKey(target: Record<K, V>, key: K): boolean
+```
 
 Checks if `target` object has the specified `key` property.
 

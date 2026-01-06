@@ -1,6 +1,8 @@
 # hasProp
 
-`Object.hasProp(target, key)`
+```ts
+function Object.hasProp(target: Record<K, V>, key: K): boolean
+```
 
 Checks if `target` object has the specified `key` property with a non-null and non-undefined value.
 

@@ -1,8 +1,15 @@
 # evolve
 
-`Object.evolve(target, props)`
+```ts
+function Object.evolve(
+    target: Record<K, V>,
+    evolver: {
+        [K]: (value: V) => V
+    }
+): Record<K, V>
+```
 
-Creates a new object with multiple properties transformed by their corresponding functions in the `props` object.
+Creates a new object with multiple properties transformed by their corresponding functions in the `evolver` object.
 
 ## Example
 

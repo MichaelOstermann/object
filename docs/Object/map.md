@@ -1,6 +1,12 @@
 # map
 
-`Object.map(target, key, transform)`
+```ts
+function Object.map(
+    target: Record<K, V>,
+    key: K,
+    transform: (value: V) => V
+): Record<K, V>
+```
 
 Creates a new object with the `key` property transformed by the `transform` function.
 

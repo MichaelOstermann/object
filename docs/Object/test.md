@@ -1,6 +1,12 @@
 # test
 
-`Object.test(target, key, predicate)`
+```ts
+function Object.test(
+    target: Record<K, V>,
+    key: K,
+    predicate: (value: V) => boolean
+): boolean
+```
 
 Checks if the `key` property of `target` object passes the `predicate` function test.
 

@@ -1,6 +1,8 @@
 # keys
 
-`Object.keys(target)`
+```ts
+function Object.keys(target: Record<K, V>): K[]
+```
 
 Returns an array of `target` object's enumerable property names.
 

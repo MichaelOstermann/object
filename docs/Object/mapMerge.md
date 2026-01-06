@@ -1,6 +1,11 @@
 # mapMerge
 
-`Object.mapMerge(target, map)`
+```ts
+function Object.mapMerge(
+    target: object,
+    map: (obj: object) => object
+): object
+```
 
 Merges `target` object with the result of calling `map` function on `target`, creating a new object with existing keys updated.
 

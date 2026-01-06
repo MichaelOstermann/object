@@ -1,6 +1,8 @@
 # getOr
 
-`Object.getOr(target, key, or)`
+```ts
+function Object.getOr(target: Record<K, V>, key: K, or: U): V | U
+```
 
 Returns the value of `key` property from `target` object, or the `or` value if not found or falsy.
 
