@@ -1,7 +1,9 @@
 # is
 
 ```ts
-function Object.is(target: unknown): boolean
+function Object.is(
+    target: unknown,
+): target is Record<PropertyKey, unknown>
 ```
 
 Checks if `target` is a plain object.

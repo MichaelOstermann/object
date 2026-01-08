@@ -6,7 +6,10 @@ import { merge } from "./merge"
  * # assign
  *
  * ```ts
- * function Object.assign(target: object, source: object): object
+ * function Object.assign<T extends object, U extends object>(
+ *     target: T,
+ *     source: U,
+ * ): T extends unknown ? Merge<T, U> : never
  * ```
  *
  * Merges properties from `source` object into `target` object, creating a new object.

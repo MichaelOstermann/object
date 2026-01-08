@@ -1,7 +1,13 @@
 # getOrThrow
 
 ```ts
-function Object.getOrThrow(target: Record<K, V>, key: K): V
+function Object.getOrThrow<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+>(
+    target: T,
+    key: U,
+): Exclude<AllUnionFields<T>[U], null | undefined>
 ```
 
 Returns the value of `key` property from `target` object, or throws an error if not found or null/undefined.

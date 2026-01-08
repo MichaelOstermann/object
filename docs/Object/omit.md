@@ -1,7 +1,10 @@
 # omit
 
 ```ts
-function Object.omit(target: Record<K, V>, keys: K[]): Record<K, V>
+function Object.omit<T extends object, K extends KeysOfUnion<T>>(
+    target: T,
+    keys: Iterable<K>,
+): DistributedOmit<T, K>
 ```
 
 Creates a new object excluding the properties specified in the `keys` iterable.

@@ -1,10 +1,10 @@
 # mapAssign
 
 ```ts
-function Object.mapAssign(
-    target: object,
-    map: (obj: object) => object
-): object
+function Object.mapAssign<T extends object, U extends object>(
+    target: T,
+    map: (target: NoInfer<T>) => U,
+): T extends unknown ? Merge<T, U> : never
 ```
 
 Merges `target` object with the result of calling `map` function on `target`, creating a new object.

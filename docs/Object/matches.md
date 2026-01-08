@@ -1,7 +1,10 @@
 # matches
 
 ```ts
-function Object.matches(target: object, props: object): boolean
+function Object.matches<T extends object, U extends T>(
+    target: T,
+    props: Partial<U>,
+): target is Matches<T, U>
 ```
 
 Checks if all properties in `props` object have equal values in `target` object.

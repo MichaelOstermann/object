@@ -15,12 +15,10 @@ type TestAllResult<T extends object, U> = Simplify<T & {
  * # testAll
  *
  * ```ts
- * function Object.testAll(
- *     target: Record<K, V>,
- *     predicates: {
- *         [K]: (value: V, key: K, obj: Record<K, V>) => boolean
- *     }
- * ): boolean
+ * function Object.testAll<
+ *     T extends object,
+ *     U extends TestAllPredicates<T>,
+ * >(target: T, props: U): target is TestAllResult<T, U>
  * ```
  *
  * Checks if all properties in `target` object pass their corresponding predicate functions in `props` object.

@@ -1,12 +1,19 @@
 import type { AllUnionFields } from "type-fest"
-import type { NonNil } from "./internals/types"
 import { dfdlT } from "@monstermann/dfdl"
 
 /**
  * # getOr
  *
  * ```ts
- * function Object.getOr(target: Record<K, V>, key: K, or: U): V | U
+ * function Object.getOr<
+ *     T extends object,
+ *     U extends keyof AllUnionFields<T>,
+ *     V,
+ * >(
+ *     target: T,
+ *     key: U,
+ *     or: V,
+ * ): Exclude<AllUnionFields<T>[U] | V, null | undefined>
  * ```
  *
  * Returns the value of `key` property from `target` object, or the `or` value if not found or falsy.
@@ -29,8 +36,8 @@ import { dfdlT } from "@monstermann/dfdl"
  *
  */
 export const getOr: {
-    <T extends object, U extends keyof AllUnionFields<T>, V>(key: U, or: V): (target: T) => NonNil<AllUnionFields<T>[U] | V>
-    <T extends object, U extends keyof AllUnionFields<T>, V>(target: T, key: U, or: V): NonNil<AllUnionFields<T>[U] | V>
+    <T extends object, U extends keyof AllUnionFields<T>, V>(key: U, or: V): (target: T) => Exclude<AllUnionFields<T>[U] | V, null | undefined>
+    <T extends object, U extends keyof AllUnionFields<T>, V>(target: T, key: U, or: V): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 } = dfdlT((target: any, key: any, or: any): any => {
     return target[key] || or
 }, 3)

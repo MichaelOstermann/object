@@ -5,7 +5,7 @@ import { dfdlT } from "@monstermann/dfdl"
  * # keys
  *
  * ```ts
- * function Object.keys(target: Record<K, V>): K[]
+ * function Object.keys<T extends object>(target: T): KeysOfUnion<T>[]
  * ```
  *
  * Returns an array of `target` object's enumerable property names.

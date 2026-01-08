@@ -54,7 +54,11 @@ type ValueForKey<
  * # fromEntries
  *
  * ```ts
- * function Object.fromEntries(entries: [K, V][]): Record<K, V>
+ * function Object.fromEntries(): <
+ *     const Entries extends IterableContainer<Entry>,
+ * >(
+ *     entries: Entries,
+ * ) => Simplify<FromEntries<Entries>>
  * ```
  *
  * Creates an object from an array of key-value pairs (entries). Each entry should be a tuple of [key, value].

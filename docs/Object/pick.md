@@ -1,7 +1,10 @@
 # pick
 
 ```ts
-function Object.pick(target: Record<K, V>, keys: K[]): Record<K, V>
+function Object.pick<T extends object, K extends KeysOfUnion<T>>(
+    target: T,
+    keys: Iterable<K>,
+): DistributedPick<T, K>
 ```
 
 Creates a new object containing only the properties specified in the `keys` iterable.

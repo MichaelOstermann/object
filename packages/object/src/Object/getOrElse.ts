@@ -1,16 +1,19 @@
 import type { AllUnionFields } from "type-fest"
-import type { NonNil } from "./internals/types"
 import { dfdlT } from "@monstermann/dfdl"
 
 /**
  * # getOrElse
  *
  * ```ts
- * function Object.getOrElse(
- *     target: Record<K, V>,
- *     key: K,
- *     orElse: (obj: Record<K, V>) => U
- * ): V | U
+ * function Object.getOrElse<
+ *     T extends object,
+ *     U extends keyof AllUnionFields<T>,
+ *     V,
+ * >(
+ *     target: T,
+ *     key: U,
+ *     orElse: (target: NoInfer<T>) => V,
+ * ): Exclude<AllUnionFields<T>[U] | V, null | undefined>
  * ```
  *
  * Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or falsy.
@@ -40,8 +43,8 @@ import { dfdlT } from "@monstermann/dfdl"
  *
  */
 export const getOrElse: {
-    <T extends object, U extends keyof AllUnionFields<T>, V>(key: U, orElse: (target: NoInfer<T>) => V): (target: T) => NonNil<AllUnionFields<T>[U] | V>
-    <T extends object, U extends keyof AllUnionFields<T>, V>(target: T, key: U, orElse: (target: NoInfer<T>) => V): NonNil<AllUnionFields<T>[U] | V>
+    <T extends object, U extends keyof AllUnionFields<T>, V>(key: U, orElse: (target: NoInfer<T>) => V): (target: T) => Exclude<AllUnionFields<T>[U] | V, null | undefined>
+    <T extends object, U extends keyof AllUnionFields<T>, V>(target: T, key: U, orElse: (target: NoInfer<T>) => V): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 } = dfdlT((target: any, key: any, orElse: any): any => {
     return target[key] || orElse(target)
 }, 3)

@@ -1,7 +1,10 @@
 # hasProp
 
 ```ts
-function Object.hasProp(target: Record<K, V>, key: K): boolean
+function Object.hasProp<
+    T extends object,
+    U extends KeysOfUnion<T>,
+>(target: T, key: U): target is HasProp<T, U>
 ```
 
 Checks if `target` object has the specified `key` property with a non-null and non-undefined value.

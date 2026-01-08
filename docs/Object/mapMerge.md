@@ -1,10 +1,10 @@
 # mapMerge
 
 ```ts
-function Object.mapMerge(
-    target: object,
-    map: (obj: object) => object
-): object
+function Object.mapMerge<T extends object>(
+    target: T,
+    map: (target: NoInfer<T>) => Partial<NoInfer<T>>,
+): T
 ```
 
 Merges `target` object with the result of calling `map` function on `target`, creating a new object with existing keys updated.

@@ -5,7 +5,10 @@ import { isMutable, markAsMutable } from "@monstermann/remmi"
  * # merge
  *
  * ```ts
- * function Object.merge(target: object, source: object): object
+ * function Object.merge<T extends object>(
+ *     target: T,
+ *     source: Partial<NoInfer<T>>,
+ * ): T
  * ```
  *
  * Merges properties from `source` object into `target` object.

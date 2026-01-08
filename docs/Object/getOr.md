@@ -1,7 +1,15 @@
 # getOr
 
 ```ts
-function Object.getOr(target: Record<K, V>, key: K, or: U): V | U
+function Object.getOr<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+    V,
+>(
+    target: T,
+    key: U,
+    or: V,
+): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 ```
 
 Returns the value of `key` property from `target` object, or the `or` value if not found or falsy.

@@ -1,7 +1,10 @@
 # get
 
 ```ts
-function Object.get(target: Record<K, V>, key: K): V | undefined
+function Object.get<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+>(target: T, key: U): AllUnionFields<T>[U]
 ```
 
 Returns the value of `key` property from `target` object, or undefined if not found.

@@ -1,10 +1,10 @@
 # forEach
 
 ```ts
-function Object.forEach(
-    target: Record<K, V>,
-    fn: (entry: [K, V], target: Record<K, V>) => void
-): Record<K, V>
+function Object.forEach<T extends object>(
+    target: T,
+    fn: ForEachCallback<T>,
+): T
 ```
 
 Executes `fn` function for each key-value pair in `target` object and returns the original object.

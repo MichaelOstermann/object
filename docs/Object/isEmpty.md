@@ -1,7 +1,7 @@
 # isEmpty
 
 ```ts
-function Object.isEmpty(target: object): boolean
+function Object.isEmpty<T extends object>(target: T): boolean
 ```
 
 Checks if `target` object has no enumerable properties.

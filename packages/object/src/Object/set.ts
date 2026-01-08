@@ -5,7 +5,11 @@ import { cloneObject } from "@monstermann/remmi"
  * # set
  *
  * ```ts
- * function Object.set(target: Record<K, V>, key: K, value: V): Record<K, V>
+ * function Object.set<T extends object, K extends keyof T>(
+ *     target: T,
+ *     key: K,
+ *     value: T[K],
+ * ): T
  * ```
  *
  * Creates a new object with the `key` property set to `value`.

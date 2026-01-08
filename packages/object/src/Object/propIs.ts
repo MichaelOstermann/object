@@ -13,7 +13,11 @@ type PropIs<T extends object, U, V> = T extends unknown
  * # propIs
  *
  * ```ts
- * function Object.propIs(target: Record<K, V>, key: K, value: V): boolean
+ * function Object.propIs<
+ *     T extends object,
+ *     U extends keyof AllUnionFields<T>,
+ *     const V extends AllUnionFields<T>[U],
+ * >(target: T, key: U, value: V): target is PropIs<T, U, V>
  * ```
  *
  * Checks if the `key` property of `target` object is equal to the specified `value` using strict equality.

@@ -117,7 +117,10 @@ build({
 ### assign
 
 ```ts
-function Object.assign(target: object, source: object): object
+function Object.assign<T extends object, U extends object>(
+    target: T,
+    source: U,
+): T extends unknown ? Merge<T, U> : never
 ```
 
 Merges properties from `source` object into `target` object, creating a new object.
@@ -141,7 +144,7 @@ pipe({ a: 1, b: 2 }, Object.assign({ b: 3, c: 4 })); // { a: 1, b: 3, c: 4 }
 ### clone
 
 ```ts
-function Object.clone(target: object): object
+function Object.clone<T extends object>(target: T): T
 ```
 
 Creates a shallow copy of an object, unless marked as mutable with `markAsMutable` inside a mutation context (see [@monstermann/remmi](https://michaelostermann.github.io/remmi/#clonearray-array)).
@@ -165,7 +168,7 @@ const copy = pipe(original, Object.clone()); // { a: 1, b: 2 }
 ### entries
 
 ```ts
-function Object.entries(target: Record<K, V>): [K, V][]
+function Object.entries<T extends object>(target: T): Entries<T>
 ```
 
 Returns an array of key-value pairs from `target` object.
@@ -187,12 +190,10 @@ pipe({ a: 1, b: 2, c: 3 }, Object.entries()); // [["a", 1], ["b", 2], ["c", 3]]
 ### evolve
 
 ```ts
-function Object.evolve(
-    target: Record<K, V>,
-    evolver: {
-        [K]: (value: V) => V
-    }
-): Record<K, V>
+function Object.evolve<T extends object, U extends Evolver<T>>(
+    target: T,
+    evolver: U,
+): T
 ```
 
 Creates a new object with multiple properties transformed by their corresponding functions in the `evolver` object.
@@ -226,10 +227,10 @@ pipe(
 ### forEach
 
 ```ts
-function Object.forEach(
-    target: Record<K, V>,
-    fn: (entry: [K, V], target: Record<K, V>) => void
-): Record<K, V>
+function Object.forEach<T extends object>(
+    target: T,
+    fn: ForEachCallback<T>,
+): T
 ```
 
 Executes `fn` function for each key-value pair in `target` object and returns the original object.
@@ -254,7 +255,11 @@ pipe(
 ### fromEntries
 
 ```ts
-function Object.fromEntries(entries: [K, V][]): Record<K, V>
+function Object.fromEntries(): <
+    const Entries extends IterableContainer<Entry>,
+>(
+    entries: Entries,
+) => Simplify<FromEntries<Entries>>
 ```
 
 Creates an object from an array of key-value pairs (entries). Each entry should be a tuple of [key, value].
@@ -287,7 +292,10 @@ pipe(
 ### get
 
 ```ts
-function Object.get(target: Record<K, V>, key: K): V | undefined
+function Object.get<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+>(target: T, key: U): AllUnionFields<T>[U]
 ```
 
 Returns the value of `key` property from `target` object, or undefined if not found.
@@ -311,7 +319,15 @@ pipe({ a: 1, b: 2 }, Object.get("c")); // undefined
 ### getOr
 
 ```ts
-function Object.getOr(target: Record<K, V>, key: K, or: U): V | U
+function Object.getOr<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+    V,
+>(
+    target: T,
+    key: U,
+    or: V,
+): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 ```
 
 Returns the value of `key` property from `target` object, or the `or` value if not found or falsy.
@@ -335,11 +351,15 @@ pipe({ a: 1, b: 2 }, Object.getOr("c", 0)); // 0
 ### getOrElse
 
 ```ts
-function Object.getOrElse(
-    target: Record<K, V>,
-    key: K,
-    orElse: (obj: Record<K, V>) => U
-): V | U
+function Object.getOrElse<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+    V,
+>(
+    target: T,
+    key: U,
+    orElse: (target: NoInfer<T>) => V,
+): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 ```
 
 Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or falsy.
@@ -370,7 +390,13 @@ pipe(
 ### getOrThrow
 
 ```ts
-function Object.getOrThrow(target: Record<K, V>, key: K): V
+function Object.getOrThrow<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+>(
+    target: T,
+    key: U,
+): Exclude<AllUnionFields<T>[U], null | undefined>
 ```
 
 Returns the value of `key` property from `target` object, or throws an error if not found or null/undefined.
@@ -394,7 +420,10 @@ pipe({ a: 1, b: 2 }, Object.getOrThrow("c")); // throws FnError
 ### hasKey
 
 ```ts
-function Object.hasKey(target: Record<K, V>, key: K): boolean
+function Object.hasKey<T extends object, U extends KeysOfUnion<T>>(
+    target: T,
+    key: U,
+): target is HasKey<T, U>
 ```
 
 Checks if `target` object has the specified `key` property.
@@ -418,7 +447,10 @@ pipe({ a: 1, b: 2 }, Object.hasKey("c")); // false
 ### hasProp
 
 ```ts
-function Object.hasProp(target: Record<K, V>, key: K): boolean
+function Object.hasProp<
+    T extends object,
+    U extends KeysOfUnion<T>,
+>(target: T, key: U): target is HasProp<T, U>
 ```
 
 Checks if `target` object has the specified `key` property with a non-null and non-undefined value.
@@ -442,7 +474,9 @@ pipe({ a: 1, b: null }, Object.hasProp("b")); // false
 ### is
 
 ```ts
-function Object.is(target: unknown): boolean
+function Object.is(
+    target: unknown,
+): target is Record<PropertyKey, unknown>
 ```
 
 Checks if `target` is a plain object.
@@ -470,7 +504,7 @@ pipe("hello", Object.is()); // false
 ### isEmpty
 
 ```ts
-function Object.isEmpty(target: object): boolean
+function Object.isEmpty<T extends object>(target: T): boolean
 ```
 
 Checks if `target` object has no enumerable properties.
@@ -494,7 +528,10 @@ pipe({ a: 1 }, Object.isEmpty()); // false
 ### isShallowEqual
 
 ```ts
-function Object.isShallowEqual(target: object, source: object): boolean
+function Object.isShallowEqual<T extends object, U extends T>(
+    target: T,
+    source: U,
+): target is U
 ```
 
 Performs a shallow equality comparison between `target` and `source` objects.
@@ -518,7 +555,7 @@ pipe({ a: 1, b: 2 }, Object.isShallowEqual({ a: 1, b: 3 })); // false
 ### keys
 
 ```ts
-function Object.keys(target: Record<K, V>): K[]
+function Object.keys<T extends object>(target: T): KeysOfUnion<T>[]
 ```
 
 Returns an array of `target` object's enumerable property names.
@@ -540,11 +577,19 @@ pipe({ a: 1, b: 2, c: 3 }, Object.keys()); // ["a", "b", "c"]
 ### map
 
 ```ts
-function Object.map(
-    target: Record<K, V>,
-    key: K,
-    transform: (value: V) => V
-): Record<K, V>
+function Object.map<T extends object, U extends keyof T>(
+    target: T,
+    key: U,
+    transform: (value: NoInfer<T>[U]) => T[U],
+): T
+```
+
+```ts [Full]
+function Object.map<T extends object, U extends keyof T>(
+    target: T,
+    key: U,
+    transform: (value: NoInfer<T>[U]) => T[U],
+): T
 ```
 
 Creates a new object with the `key` property transformed by the `transform` function.
@@ -569,10 +614,10 @@ pipe(
 ### mapAssign
 
 ```ts
-function Object.mapAssign(
-    target: object,
-    map: (obj: object) => object
-): object
+function Object.mapAssign<T extends object, U extends object>(
+    target: T,
+    map: (target: NoInfer<T>) => U,
+): T extends unknown ? Merge<T, U> : never
 ```
 
 Merges `target` object with the result of calling `map` function on `target`, creating a new object.
@@ -599,10 +644,10 @@ pipe(
 ### mapMerge
 
 ```ts
-function Object.mapMerge(
-    target: object,
-    map: (obj: object) => object
-): object
+function Object.mapMerge<T extends object>(
+    target: T,
+    map: (target: NoInfer<T>) => Partial<NoInfer<T>>,
+): T
 ```
 
 Merges `target` object with the result of calling `map` function on `target`, creating a new object with existing keys updated.
@@ -627,7 +672,10 @@ pipe(
 ### matches
 
 ```ts
-function Object.matches(target: object, props: object): boolean
+function Object.matches<T extends object, U extends T>(
+    target: T,
+    props: Partial<U>,
+): target is Matches<T, U>
 ```
 
 Checks if all properties in `props` object have equal values in `target` object.
@@ -651,7 +699,10 @@ pipe({ a: 1, b: 2, c: 3 }, Object.matches({ a: 1, b: 3 })); // false
 ### merge
 
 ```ts
-function Object.merge(target: object, source: object): object
+function Object.merge<T extends object>(
+    target: T,
+    source: Partial<NoInfer<T>>,
+): T
 ```
 
 Merges properties from `source` object into `target` object.
@@ -673,7 +724,10 @@ pipe({ a: 1, b: 2 }, Object.merge({ a: 3, c: 4 })); // { a: 3, b: 2 }
 ### omit
 
 ```ts
-function Object.omit(target: Record<K, V>, keys: K[]): Record<K, V>
+function Object.omit<T extends object, K extends KeysOfUnion<T>>(
+    target: T,
+    keys: Iterable<K>,
+): DistributedOmit<T, K>
 ```
 
 Creates a new object excluding the properties specified in the `keys` iterable.
@@ -695,7 +749,10 @@ pipe({ a: 1, b: 2, c: 3 }, Object.omit(["a", "c"])); // { b: 2 }
 ### pick
 
 ```ts
-function Object.pick(target: Record<K, V>, keys: K[]): Record<K, V>
+function Object.pick<T extends object, K extends KeysOfUnion<T>>(
+    target: T,
+    keys: Iterable<K>,
+): DistributedPick<T, K>
 ```
 
 Creates a new object containing only the properties specified in the `keys` iterable.
@@ -717,7 +774,11 @@ pipe({ a: 1, b: 2, c: 3 }, Object.pick(["a", "c"])); // { a: 1, c: 3 }
 ### propIs
 
 ```ts
-function Object.propIs(target: Record<K, V>, key: K, value: V): boolean
+function Object.propIs<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+    const V extends AllUnionFields<T>[U],
+>(target: T, key: U, value: V): target is PropIs<T, U, V>
 ```
 
 Checks if the `key` property of `target` object is equal to the specified `value` using strict equality.
@@ -741,7 +802,11 @@ pipe({ a: 1, b: 2 }, Object.propIs("a", 2)); // false
 ### set
 
 ```ts
-function Object.set(target: Record<K, V>, key: K, value: V): Record<K, V>
+function Object.set<T extends object, K extends keyof T>(
+    target: T,
+    key: K,
+    value: T[K],
+): T
 ```
 
 Creates a new object with the `key` property set to `value`.
@@ -763,11 +828,14 @@ pipe({ a: 1, b: 2 }, Object.set("a", 3)); // { a: 3, b: 2 }
 ### test
 
 ```ts
-function Object.test(
-    target: Record<K, V>,
-    key: K,
-    predicate: (value: V) => boolean
-): boolean
+function Object.test<
+    T extends object,
+    U extends keyof AllUnionFields<T>,
+>(
+    target: T,
+    key: U,
+    predicate: (value: AllUnionFields<T>[U]) => boolean,
+): target is Test<T, U, AllUnionFields<T>[U]>
 ```
 
 Checks if the `key` property of `target` object passes the `predicate` function test.
@@ -798,12 +866,10 @@ pipe(
 ### testAll
 
 ```ts
-function Object.testAll(
-    target: Record<K, V>,
-    predicates: {
-        [K]: (value: V, key: K, obj: Record<K, V>) => boolean
-    }
-): boolean
+function Object.testAll<
+    T extends object,
+    U extends TestAllPredicates<T>,
+>(target: T, props: U): target is TestAllResult<T, U>
 ```
 
 Checks if all properties in `target` object pass their corresponding predicate functions in `props` object.
@@ -827,7 +893,9 @@ pipe({ a: 1, b: 2 }, Object.testAll({ a: (x) => x > 3, b: (x) => x > 0 })); // f
 ### values
 
 ```ts
-function Object.values(obj: Record<K, V>): V[]
+function Object.values<T extends object>(
+    target: T,
+): AllUnionFields<T> extends infer U ? U[keyof U][] : never
 ```
 
 Returns an array of `target` object's enumerable property values.

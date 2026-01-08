@@ -1,12 +1,17 @@
 import type { AllUnionFields } from "type-fest"
-import type { NonNil } from "./internals/types"
 import { dfdlT } from "@monstermann/dfdl"
 
 /**
  * # getOrThrow
  *
  * ```ts
- * function Object.getOrThrow(target: Record<K, V>, key: K): V
+ * function Object.getOrThrow<
+ *     T extends object,
+ *     U extends keyof AllUnionFields<T>,
+ * >(
+ *     target: T,
+ *     key: U,
+ * ): Exclude<AllUnionFields<T>[U], null | undefined>
  * ```
  *
  * Returns the value of `key` property from `target` object, or throws an error if not found or null/undefined.
@@ -29,8 +34,8 @@ import { dfdlT } from "@monstermann/dfdl"
  *
  */
 export const getOrThrow: {
-    <T extends object, U extends keyof AllUnionFields<T>>(key: U): (target: T) => NonNil<AllUnionFields<T>[U]>
-    <T extends object, U extends keyof AllUnionFields<T>>(target: T, key: U): NonNil<AllUnionFields<T>[U]>
+    <T extends object, U extends keyof AllUnionFields<T>>(key: U): (target: T) => Exclude<AllUnionFields<T>[U], null | undefined>
+    <T extends object, U extends keyof AllUnionFields<T>>(target: T, key: U): Exclude<AllUnionFields<T>[U], null | undefined>
 } = dfdlT((target: any, key: any): any => {
     const value = target[key]
     if (value != null) return value

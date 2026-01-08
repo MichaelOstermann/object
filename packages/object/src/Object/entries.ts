@@ -5,7 +5,7 @@ import { dfdlT } from "@monstermann/dfdl"
  * # entries
  *
  * ```ts
- * function Object.entries(target: Record<K, V>): [K, V][]
+ * function Object.entries<T extends object>(target: T): Entries<T>
  * ```
  *
  * Returns an array of key-value pairs from `target` object.

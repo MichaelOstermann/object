@@ -1,7 +1,9 @@
 # values
 
 ```ts
-function Object.values(obj: Record<K, V>): V[]
+function Object.values<T extends object>(
+    target: T,
+): AllUnionFields<T> extends infer U ? U[keyof U][] : never
 ```
 
 Returns an array of `target` object's enumerable property values.

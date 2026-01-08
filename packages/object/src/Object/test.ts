@@ -13,11 +13,14 @@ type Test<T extends object, U, V> = T extends unknown
  * # test
  *
  * ```ts
- * function Object.test(
- *     target: Record<K, V>,
- *     key: K,
- *     predicate: (value: V) => boolean
- * ): boolean
+ * function Object.test<
+ *     T extends object,
+ *     U extends keyof AllUnionFields<T>,
+ * >(
+ *     target: T,
+ *     key: U,
+ *     predicate: (value: AllUnionFields<T>[U]) => boolean,
+ * ): target is Test<T, U, AllUnionFields<T>[U]>
  * ```
  *
  * Checks if the `key` property of `target` object passes the `predicate` function test.

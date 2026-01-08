@@ -4,7 +4,10 @@ import { dfdlT } from "@monstermann/dfdl"
  * # isShallowEqual
  *
  * ```ts
- * function Object.isShallowEqual(target: object, source: object): boolean
+ * function Object.isShallowEqual<T extends object, U extends T>(
+ *     target: T,
+ *     source: U,
+ * ): target is U
  * ```
  *
  * Performs a shallow equality comparison between `target` and `source` objects.

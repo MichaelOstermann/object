@@ -5,11 +5,19 @@ import { cloneObject } from "@monstermann/remmi"
  * # map
  *
  * ```ts
- * function Object.map(
- *     target: Record<K, V>,
- *     key: K,
- *     transform: (value: V) => V
- * ): Record<K, V>
+ * function Object.map<T extends object, U extends keyof T>(
+ *     target: T,
+ *     key: U,
+ *     transform: (value: NoInfer<T>[U]) => T[U],
+ * ): T
+ * ```
+ *
+ * ```ts [Full]
+ * function Object.map<T extends object, U extends keyof T>(
+ *     target: T,
+ *     key: U,
+ *     transform: (value: NoInfer<T>[U]) => T[U],
+ * ): T
  * ```
  *
  * Creates a new object with the `key` property transformed by the `transform` function.
