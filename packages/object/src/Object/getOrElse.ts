@@ -16,7 +16,7 @@ import { dfdlT } from "@monstermann/dfdl"
  * ): Exclude<AllUnionFields<T>[U] | V, null | undefined>
  * ```
  *
- * Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or falsy.
+ * Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or nullish.
  *
  * ## Example
  *
@@ -46,5 +46,5 @@ export const getOrElse: {
     <T extends object, U extends keyof AllUnionFields<T>, V>(key: U, orElse: (target: NoInfer<T>) => V): (target: T) => Exclude<AllUnionFields<T>[U] | V, null | undefined>
     <T extends object, U extends keyof AllUnionFields<T>, V>(target: T, key: U, orElse: (target: NoInfer<T>) => V): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 } = dfdlT((target: any, key: any, orElse: any): any => {
-    return target[key] || orElse(target)
+    return target[key] ?? orElse(target)
 }, 3)

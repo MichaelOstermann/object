@@ -12,7 +12,7 @@ function Object.getOrElse<
 ): Exclude<AllUnionFields<T>[U] | V, null | undefined>
 ```
 
-Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or falsy.
+Returns the value of `key` property from `target` object, or the result of calling `orElse` function with `target` if not found or nullish.
 
 ## Example
 
