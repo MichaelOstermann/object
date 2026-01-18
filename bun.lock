@@ -23,7 +23,7 @@
       "version": "0.2.0",
       "dependencies": {
         "@monstermann/dfdl": "^0.1.0",
-        "@monstermann/remmi": "^0.1.0",
+        "@monstermann/remmi": "^0.2.0",
         "type-fest": "^5.0.0",
       },
     },
@@ -278,7 +278,7 @@
 
     "@monstermann/object": ["@monstermann/object@workspace:packages/object"],
 
-    "@monstermann/remmi": ["@monstermann/remmi@0.1.0", "", {}, "sha512-Jxj/e39iYJXHrBsIhcapvhh0lBrNYRm6Awux3Y7Py3wzyXX7DQWIbGvrJmL5MQEtuh022IDlMI+iwkYEyTzyCg=="],
+    "@monstermann/remmi": ["@monstermann/remmi@0.2.0", "", {}, "sha512-/2BUaWvXrSrQ9jDMxQudsYTXUiCYgUFO1O3bfgqL5E1Hd7JD9xwOBnBDSEnEQr3oi/wrgSkEWG2hMDyC1uk+Rg=="],
 
     "@monstermann/tree-shake-import-namespaces": ["@monstermann/tree-shake-import-namespaces@0.3.0", "", { "dependencies": { "@jridgewell/remapping": "^2.3.4", "@jridgewell/sourcemap-codec": "^1.5.4", "astring": "^1.9.0", "magic-string": "^0.30.17", "oxc-parser": "^0.101.0", "oxc-walker": "^0.6.0", "picocolors": "^1.1.1" } }, "sha512-ipwNfixAUhSvsZ13wHN72QyxIHTX5mE4TfGpyvNqi2YPF/f+sbUpbmJ/yRHJoTwEarogEa4OsHKHXYE90pjOHA=="],
 
