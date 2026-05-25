@@ -33,7 +33,7 @@
         "release": "bun publish --access public"
     },
     "dependencies": {
-        "@monstermann/dfdl": "^0.1.0",
+        "@monstermann/dfdl": "^0.2.0",
         "@monstermann/remmi": "^0.2.0",
         "type-fest": "^5.0.0"
     }
