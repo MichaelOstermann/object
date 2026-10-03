@@ -1,3 +1,6 @@
+> [!WARNING]
+> This package is no longer maintained. It moved into [`@monstermann/fn`](https://github.com/MichaelOstermann/fn) as the `Obj` namespace.
+
 <div align="center">
 
 <h1>object</h1>
